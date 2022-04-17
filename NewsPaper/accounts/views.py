@@ -1,7 +1,9 @@
 from django.views.generic import UpdateView, DetailView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .forms import UserForm
+from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 class ProfileDetail(LoginRequiredMixin, DetailView):
@@ -23,3 +25,17 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, **kwargs):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_author'] = not self.request.user.groups.filter(name='authors').exists()
+        return context
+
+
+@login_required
+def upgrade_me(request):
+    user = request.user
+    premium_group = Group.objects.get(name='authors')
+    if not request.user.groups.filter(name='authors').exists():
+        premium_group.user_set.add(user)
+    return redirect('/account/')

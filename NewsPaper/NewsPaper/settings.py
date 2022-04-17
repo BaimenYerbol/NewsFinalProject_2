@@ -151,6 +151,8 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/account/'
 
+ACCOUNT_FORMS = {'signup': 'accounts.forms.BasicSignupForm'}
+
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True

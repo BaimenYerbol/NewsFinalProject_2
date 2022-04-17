@@ -11,5 +11,11 @@
     Email: {{ form.email }}
     <br><br>
     <input type="submit" value="Edit">
+    {% if is_not_author %}
+    <br>
+<button> <a href="../../../account/upgrade/"> Wanna become an author!</a> </button>
+{% endif %}
+
+
 </form>
 {% endblock content %}

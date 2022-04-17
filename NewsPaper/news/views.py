@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import *
 from .filters import *
 from .forms import PostForm
@@ -40,12 +41,14 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreateView(CreateView):
+class PostCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
     template_name = 'post_create.html'
     form_class = PostForm
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = ('news.change_post',)
     template_name = 'post_edit.html'
     form_class = PostForm
 
@@ -54,7 +57,8 @@ class PostUpdateView(UpdateView):
         return Post.objects.get(pk=id)
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = ('news.delete_post',)
     template_name = 'post_delete.html'
     queryset = Post.objects.all()
     success_url = '/posts/'
