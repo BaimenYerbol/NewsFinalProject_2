@@ -1,0 +1,17 @@
+{% extends 'news/main.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Account
+{% endblock title %}
+
+{% block content %}
+Your username: {{ account.username }}
+<br><br>
+Your email: {{ account.email }}
+<br><br>
+<a href="/account/edit"><u>Edit your profile</u></a>
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'news/default.html' %}
+
+{% block title %} Post list {% endblock title %}
+ 
+{% block content %}
+<h3>Creating the post</h3>
+<form method="POST">
+    {% csrf_token %} 
+    <table>
+        <tr><td>Author:</td><td>{{ form.postAuthor }}</td></tr>
+    <br>
+        <tr><td>Category:</td><td>{{form.postCategory}}</td></tr>
+    <br>
+        <tr><td>Type of the post:</td><td>{{form.nameCategory}}</td></tr>
+    <br>
+        <tr><td>Title:</td><td>{{form.head}}</td></tr>
+    <br>
+        <tr><td>Text:</td><td>{{form.text}}</td></tr>
+    </table>
+    <input type="submit" value="Add">
+</form>
+{% endblock content %}

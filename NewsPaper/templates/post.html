@@ -1,0 +1,21 @@
+{% extends 'news/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+<h3> {{ post.head }} </h3>
+<h4> Author: {{ post.postAuthor.authorAccount }} </h4>
+{{ post.creationTime | date:'d.m.y' }}
+<br>
+<br>
+{{ post.text|censor }}
+<br>
+<br>
+<a href="/posts/{{ post.pk }}/edit"><u>Редактировать</u></a>
+            <a href="/posts/{{ post.pk }}/delete"><u> Удалить </u></a>
+
+{% endblock content %}

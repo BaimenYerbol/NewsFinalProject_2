@@ -1,0 +1,22 @@
+{% extends 'news/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post list
+{% endblock title %}
+
+{% block content %}
+<h2>Do you really want to delete the post?</h2>
+<h3> {{ post.head }} </h3>
+<h4> Author: {{ post.postAuthor.authorAccount }} </h4>
+{{ post.creationTime | date:'d.m.y' }}
+<br>
+<br>
+{{ post.text|censor }}
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Submit"></form>
+
+{% endblock content %}

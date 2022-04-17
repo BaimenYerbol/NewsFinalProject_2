@@ -1,0 +1,15 @@
+{% extends 'news/default.html' %}
+
+{% block title %} Post list {% endblock title %}
+ 
+{% block content %}
+<h3>Account Edit</h3>
+<form method="POST">
+    {% csrf_token %} 
+    Username: {{ form.username }}
+    <br><br>
+    Email: {{ form.email }}
+    <br><br>
+    <input type="submit" value="Edit">
+</form>
+{% endblock content %}
